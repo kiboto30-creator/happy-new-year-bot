@@ -1,8 +1,8 @@
 import logging
 import requests
 from flask import Blueprint, request, jsonify
-from .config import HEYGEN_API_KEY
-from .storage import get_chat_by_task, remove_task
+from config import HEYGEN_API_KEY
+from storage import get_chat_by_task, remove_task
 
 heygen_bp = Blueprint("heygen", __name__)
 
@@ -55,6 +55,7 @@ def create_video_heygen(script_text: str, chat_id: int, callback_url: str):
     except requests.RequestException as e:
         logging.exception(f"Ошибка HeyGen API: {e}")
         return None
+
 
 
 
