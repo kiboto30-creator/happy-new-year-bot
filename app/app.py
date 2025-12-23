@@ -1,7 +1,7 @@
 import logging
 from flask import Flask, jsonify
-from .telegram import tg_bp
-from .heygen import heygen_bp
+from telegram import tg_bp
+from heygen import heygen_bp
 
 app = Flask(__name__)
 
@@ -23,5 +23,6 @@ if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO)
     port = int(os.environ.get("PORT", 8080))
     app.run(host="0.0.0.0", port=port)
+
 
 
