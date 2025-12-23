@@ -1,10 +1,10 @@
 import logging
 import requests
 from flask import Blueprint, request, jsonify
-from .config import TELEGRAM_BOT_TOKEN, BASE_URL
-from .utils import parse_message, generate_script
-from .storage import save_task
-from .heygen import create_video_heygen
+from config import TELEGRAM_BOT_TOKEN, BASE_URL
+from utils import parse_message, generate_script
+from storage import save_task
+from heygen import create_video_heygen
 
 TELEGRAM_API_URL = f"https://api.telegram.org/bot{TELEGRAM_BOT_TOKEN}"
 
@@ -70,6 +70,7 @@ def send_video_telegram(chat_id: int, video_url: str):
         resp.raise_for_status()
     except Exception as e:
         logging.exception(f"Ошибка отправки видео в Telegram: {e}")
+
 
 
 
