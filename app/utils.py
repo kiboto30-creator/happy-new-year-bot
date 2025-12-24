@@ -19,6 +19,33 @@ def generate_script(name: str, message: str) -> str:
         f"{message}"
     )
     return script
+def parse_message(text: str):
+    """
+    Ожидаемый формат:
+    Имя: текст поздравления
+    """
+
+    if not text:
+        return None, None
+
+    text = text.strip()
+
+    if ":" not in text:
+        return None, None
+
+    name, congrat = text.split(":", 1)
+
+    name = name.strip()
+    congrat = congrat.strip()
+
+    if not name or not congrat:
+        return None, None
+
+    if len(name) > 50:
+        return None, None
+
+    return name, congrat
+
 
 
 
