@@ -12,9 +12,9 @@ HEYGEN_API_URL = "https://api.heygen.com/v1/video.generate"
 
 @heygen_bp.route("/heygen_webhook", methods=["POST"])
 def heygen_webhook():
+    from telegram_handlers import send_video_telegram  
     data = request.json
-    logging.info(f"HeyGen webhook received: {data}")
-
+        logging.info(f"HeyGen webhook received: {data}")
     if not data:
         return jsonify({"ok": False}), 400
 
@@ -86,6 +86,7 @@ def create_video_heygen(script_text: str, chat_id: int, callback_url: str):
     except Exception:
         logging.exception("Ошибка HeyGen API")
         return None
+
 
 
 
