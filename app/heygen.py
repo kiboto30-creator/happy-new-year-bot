@@ -1,9 +1,9 @@
 import logging
 import requests
 from flask import Blueprint, request, jsonify
+
 from config import HEYGEN_API_KEY
 from storage import get_chat_by_task, remove_task
-from telegram_handlers import send_video_telegram
 
 heygen_bp = Blueprint("heygen", __name__)
 
@@ -12,9 +12,12 @@ HEYGEN_API_URL = "https://api.heygen.com/v1/video.generate"
 
 @heygen_bp.route("/heygen_webhook", methods=["POST"])
 def heygen_webhook():
-    from telegram_handlers import send_video_telegram  
+    # ленивый импорт, чтобы не было циклов
+    from telegram_handlers import send_video_telegram
+
     data = request.json
-        logging.info(f"HeyGen webhook received: {data}")
+    logging.info(f"HeyGen webhook received: {data}")
+
     if not data:
         return jsonify({"ok": False}), 400
 
@@ -86,12 +89,3 @@ def create_video_heygen(script_text: str, chat_id: int, callback_url: str):
     except Exception:
         logging.exception("Ошибка HeyGen API")
         return None
-
-
-
-
-
-
-
-
-
